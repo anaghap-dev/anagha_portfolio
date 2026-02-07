@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anagha's Portfolio</title>
+  <style>
+    * { box-sizing: border-box; }
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url('https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.85);
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(30, 30, 30, 0.9);
+      padding: 15px;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      text-decoration: none;
+    }
+
+    nav ul li a:hover {
+      color: #ff4d4d;
+    }
+
+    .hero {
+      height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      
+    }
+
+    .hero h1 {
+      font-size: 65px;
+      line-height: 1.5;
+    }
+
+    .name {
+      color: #ff4d4d;
+    }
+
+    section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .tab-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+
+    .tab-buttons button {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: white;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      padding: 8px 16px;
+    }
+
+    .tab-buttons button.active {
+      color: #ff4d4d;
+      border-bottom: 2px solid #ff4d4d;
+    }
+
+    .tab-content {
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    .content-box {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      animation: fadeInBox 0.4s ease-in-out;
+      box-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
+      color: #ffdede;
+      font-size: 20px;
+    }
+
+    .content-box ul {
+      text-align: left;
+      font-size: 22px;
+      color: #ff9999;
+      padding-left: 30px;
+      line-height: 1.8;
+    }
+
+    #projects {
+      padding: 60px 20px;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+ .project-box {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  cursor: pointer;
+  aspect-ratio: 1 / 2; /* width:height = 1:2 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+    .project-box:hover {
+      transform: scale(1.25);
+      box-shadow: 0 0 15px #ff4d4d;
+    }
+
+    .project-desc {
+      display: none;
+      margin-top: 10px;
+      color: #ffcfcf;
+      font-size: 16px;
+    }
+
+    .project-box.active .project-desc {
+      display: block;
+    }
+
+    .contact-square {
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInBox 0.4s ease-in-out;
+  color: #ffdede;
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.contact-info p,
+.contact-info a {
+  font-size: 14px;
+  color: #ff9999;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  color: #ff4d4d;
+  text-decoration: underline;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+}
+
+.contact-form button {
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff4d4d;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #e60000;
+}
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInBox {
+      0% {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#tabs">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Hello, I am <span class="name">Anagha P</span><br /> from CUSAT</h1>
+    </section>
+
+    <section id="about">
+      <h2>About Me</h2>
+      <p>I’m passionate Full Stack developer and i  love turning ideas into digital products.</p>
+    </section>
+
+    <section id="tabs">
+      <h2>My Background</h2>
+      <div class="tab-buttons">
+        <button class="active" data-tab="skill">Skill</button>
+        <button data-tab="education">Education</button>
+        <button data-tab="experience">Experience</button>
+      </div>
+      <div class="tab-content" id="tab-content"></div>
+    </section>
+
+    <section id="projects">
+      <h2>My Projects</h2>
+      <div class="project-grid">
+        <div class="project-box">
+          <h3>STUDYOS</h3>
+          <div class="project-desc">agentic AI-powered academic operating system that autonomously generates study notes,predicts exam questions,delivers personalized learning questions using RAG and intelligent wworkflows</div>
+        </div>
+        <div class="project-box">
+          <h3>SPORTSMATE</h3>
+          <div class="project-desc">Full-stack web application that connects sports enthusiasts based on location,sport,and rreal-time availability,making it easier than ever to step out,connect and play.</div>
+        </div>
+        <div class="project-box">
+          <h3>NEURO-AI</h3>
+          <div class="project-desc">AI-Powered insights for lifelong brain health,monitoring by enabling early at home checkups,translating complex medical data into clear insights,helping patients make safer decisions,empowering doctors and healthcaresystems with AI-driven risk analysis,continuous tracking,scalable care</div>
+        </div>
+      </div>
+    </section>
+<section id="contact">
+  <h2>Contact Me</h2>
+  <div class="contact-square">
+    <div class="contact-content">
+      <div class="contact-info">
+        <p><strong>Email:</strong> anaghapchandran@gmail.com</p>
+        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/anagha" target="_blank">linkedin.com/in/anagha</a></p>
+        <p><strong>GitHub:</strong> <a href="https://github.com/anagha" target="_blank">anaghap-dev</a></p>
+        
+      </div>
+      <form class="contact-form" action="https://formspree.io/f/meozjpyk" method="post">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" rows="3" placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+
+  </div>
+
+  <script>
+    // Tab switching
+    const tabButtons = document.querySelectorAll('.tab-buttons button');
+    const tabContent = document.getElementById('tab-content');
+
+    const content = {
+      skill: `
+        <div class="content-box">
+          <ul>
+            <li>HTML & CSS</li>
+            <li>JavaScript </li>
+            <li>React.js</li>
+            <li>Node.js</li>
+            <li>Express.js</li>
+            <li>Docker</li>
+            <li>Agentic-Ai</li>
+            <li>Git & GitHub</li>
+          </ul>
+        </div>
+      `,
+      education: `
+        <div class="content-box">
+          <p><strong>B.Tech</strong> in Computer Science - CUSAT</p>
+        </div>
+      `,
+      experience: `
+        <div class="content-box">
+          <p><strong>Internship:</strong> GJ GLOBAL,Cyberpark<br><strong>Intern:</strong> XYZON innovations private limited</p>
+        </div>
+      `
+    };
+
+    tabContent.innerHTML = content.skill;
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        const tabName = button.dataset.tab;
+        tabContent.innerHTML = content[tabName];
+      });
+    });
+
+    // Project toggle
+    const projectBoxes = document.querySelectorAll('.project-box');
+    projectBoxes.forEach(box => {
+      box.addEventListener('click', () => {
+        box.classList.toggle('active');
+      });
+    });
+ 
+  </script>
+</body>
+</html>
